@@ -6,21 +6,6 @@
 {{ Form::model($item, array('method' => 'PATCH', 'route' => array('items.update', $item->id))) }}
 	<ul>
         <li>
-            {{ Form::label('item_id', 'Item_id:') }}
-            {{ Form::input('number', 'item_id') }}
-        </li>
-
-        <li>
-            {{ Form::label('created_at', 'Created_at:') }}
-            {{ Form::text('created_at') }}
-        </li>
-
-        <li>
-            {{ Form::label('updated_at', 'Updated_at:') }}
-            {{ Form::text('updated_at') }}
-        </li>
-
-        <li>
             {{ Form::label('title', 'Title:') }}
             {{ Form::text('title') }}
         </li>

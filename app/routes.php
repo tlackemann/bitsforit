@@ -16,6 +16,13 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::get('my/offers', 'MyController@offers');
+Route::get('my/items', 'MyController@items');
+
+Route::get('offers/accept/{id}', 'OffersController@accept');
+Route::get('offers/reject', 'OffersController@reject');
+
+Route::get('items/{id}/{tab}', 'ItemsController@show');
 Route::controller('users', 'UserController');
 
 Route::resource('groups', 'GroupController');
@@ -31,3 +38,9 @@ Route::resource('motds', 'MotdsController');
 Route::resource('notifications', 'NotificationsController');
 
 Route::resource('templates', 'TemplatesController');
+
+Route::resource('offers', 'OffersController');
+
+Route::resource('feedback', 'FeedbacksController');
+
+Route::resource('jobs', 'JobsController');

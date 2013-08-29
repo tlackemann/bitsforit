@@ -23,9 +23,11 @@ class CategoriesController extends BaseController {
 	 */
 	public function index()
 	{
-		$categories = $this->category->all();
+		$itemCategories = $this->category->where('type','item')->get();
 
-		return View::make('categories.index', compact('categories'));
+		$jobCategories = $this->category->where('type','job')->get();
+
+		return View::make('categories.index', compact('itemCategories','jobCategories'));
 	}
 
 	/**

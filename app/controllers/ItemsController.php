@@ -48,6 +48,7 @@ class ItemsController extends BaseController {
 
 		if ($validation->passes())
 		{
+			$input['user_id'] = Sentry::getUser()->id;
 			$this->item->create($input);
 
 			return Redirect::route('items.index');
@@ -65,11 +66,12 @@ class ItemsController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($id, $tab = 'index')
 	{
 		$item = $this->item->findOrFail($id);
-
-		return View::make('items.show', compact('item'));
+		$user_id = Sentry::getUser()->id;
+		$offer = Offer::where('item_id', $id)->where('accepted', 1)->get();
+		return View::make('items.show.'.$tab, compact('item', 'offer', 'user_id'));
 	}
 
 	/**

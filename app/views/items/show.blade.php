@@ -1,11 +1,13 @@
-@extends('layouts.scaffold')
+@extends('layouts.default')
 
-@section('main')
+@section('content')
 
 <h1>Show Item</h1>
+@if ({{$offer->id}})
 
-<p>{{ link_to_route('items.index', 'Return to all items') }}</p>
-
+@else
+<p>{{ link_to("items/$item->id/offer", 'Make an offer') }}</p>
+@endif
 <table class="table table-striped table-bordered">
 	<thead>
 		<tr>

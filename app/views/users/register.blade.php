@@ -9,7 +9,7 @@ Register
 {{-- Content --}}
 @section('content')
 <h4>Register New Account</h4>
-<div class="well">
+
 	<form class="form-horizontal" action="{{ URL::to('users/register') }}" method="post">
         {{ Form::token() }}
         
@@ -42,7 +42,32 @@ Register
 	    	<input class="btn " type="reset" value="Reset">
 	    </div>	
 	</form>
-</div>
+    <form action="{{ URL::to('users/register') }}" method="post">  
 
+        <h2 class="form-signin-heading">Create account</h2> 
+        {{ Form::token(); }}
+
+        {{ ($errors->has('email') ? $errors->first('email') : '') }}
+        {{ ($errors->has('password') ?  $errors->first('password') : '') }}
+        {{ ($errors->has('password_confirmation') ? $errors->first('password_confirmation') : '') }}
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon glyphicon glyphicon-envelope"></span>
+          <input type="text" class="form-control input-lg" placeholder="Username">
+        </div>
+
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon glyphicon glyphicon-envelope"></span>
+          <input type="text" class="form-control input-lg" placeholder="Username">
+        </div>
+
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon glyphicon glyphicon-envelope"></span>
+          <input type="text" class="form-control input-lg" placeholder="Username">
+        </div>
+
+        <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign Up"/>
+        <span>Already have an account? <a href="{{ URL::to('users/resetpassword') }}" class="btn btn-link">Sign In</a></span>
+       
+  </form>
 
 @stop

@@ -1,4 +1,4 @@
-@extends('layouts.default')
+@extends('layouts.splash')
 
 {{-- Web site Title --}}
 @section('title')
