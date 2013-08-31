@@ -11,13 +11,12 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/', 'HomeController@showWelcome');
 
 Route::get('my/offers', 'MyController@offers');
 Route::get('my/items', 'MyController@items');
+Route::get('my', 'MyController@index');
+Route::get('my/dashboard', 'MyController@index');
 
 Route::get('offers/accept/{id}', 'OffersController@accept');
 Route::get('offers/reject', 'OffersController@reject');

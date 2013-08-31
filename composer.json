@@ -5,7 +5,9 @@
 	"require": {
 		"laravel/framework": "4.0.*",
 		"cartalyst/sentry": "2.0.*",
-		"way/generators": "dev-master"
+		"way/generators": "dev-master",
+		"fzaninotto/faker": "1.2.*@dev",
+		"kairos/phpqrcode": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

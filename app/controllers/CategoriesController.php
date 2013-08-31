@@ -24,8 +24,49 @@ class CategoriesController extends BaseController {
 	public function index()
 	{
 		$itemCategories = $this->category->where('type','item')->get();
-
 		$jobCategories = $this->category->where('type','job')->get();
+		$categoryIds = array();
+
+		// Get all the category ids
+		foreach($itemCategories as $itemCategory)
+		{
+			$categoryId = $itemCategory->id;
+			if (!isset($categoryIds[$categoryId])) $categoryIds[$categoryId] = $categoryId;
+		}
+		foreach($jobCategories as $jobCategory)
+		{
+			$categoryId = $jobCategory->id;
+			if (!isset($categoryIds[$categoryId])) $categoryIds[$categoryId] = $categoryId;
+		}
+
+		// Count the objects for each category id
+		$categoryCount = array();
+		$itemCollection = Item::wherein('category_id', $categoryIds)->get();
+		foreach($itemCollection as $item)
+		{
+			$categoryId = $item->category_id;
+
+			if (!isset($categoryCount[$categoryId]))
+			{
+				$categoryCount[$categoryId] = 1;
+			}
+			else
+			{
+				++$categoryCount[$categoryId];
+			}
+		}
+
+		// Return the final arrays
+		foreach ($itemCategories as $itemCategory)
+		{
+			$count = $itemCategory->id;
+			$itemCategory->name = $itemCategory->name." ({$count})";
+		}
+		foreach ($jobCategories as $jobCategory)
+		{
+			$count = $jobCategory->id;
+			$jobCategory->name = $jobCategory->name." ({$count})";
+		}
 
 		return View::make('categories.index', compact('itemCategories','jobCategories'));
 	}
@@ -76,12 +117,12 @@ class CategoriesController extends BaseController {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  string  $slug
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($slug)
 	{
-		$category = $this->category->findOrFail($id);
+		$category = $this->category->where('slug',$slug)->firstOrFail();
 
 		return View::make('categories.show', compact('category'));
 	}
